@@ -23,7 +23,7 @@ public class ShopListener {
 	public void listen(Operation op) throws Exception {
 		System.out.println("op = " + op);
 
-		if(op.getBo().equals("article") && op.getAction().equals("upsert")) {
+		if(op.getBo().equals("article")) {
 			Stock stock = mapper.treeToValue(op.getObject(), Stock.class);
 
 			switch (op.getAction()) {
@@ -34,6 +34,11 @@ public class ShopListener {
 					stocks.remove(stock.getUuid());
 					break;
 			}
+		}
+
+		if(op.getBo().equals("stock") && op.getAction().equals("upsert")) {
+			Stock stock = mapper.treeToValue(op.getObject(), Stock.class);
+			stocks.put(stock.getUuid(), stock);
 		}
 	}
 }

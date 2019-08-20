@@ -34,4 +34,10 @@ public class StockRestController {
 	public long count() {
 		return stocks.size();
 	}
+
+	@PostMapping
+	public void setQuantity(@RequestBody Stock stock) {
+		Operation op = new Operation("stock", "upsert", mapper.valueToTree(stock));
+		kafka.send("shop", op);
+	}
 }

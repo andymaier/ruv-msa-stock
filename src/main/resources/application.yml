@@ -7,6 +7,9 @@ spring:
     consumer:
       group-id: stock-${random.uuid}
       auto-offset-reset: earliest
+      #bootstrap-servers: flexIT.ruv.de
+     #producer:
+       #bootstrap-servers: flexIT.ruv.de
 
 server:
   port: 8081

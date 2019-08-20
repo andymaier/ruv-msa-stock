@@ -25,7 +25,15 @@ public class ShopListener {
 
 		if(op.getBo().equals("article") && op.getAction().equals("upsert")) {
 			Stock stock = mapper.treeToValue(op.getObject(), Stock.class);
-			stocks.put(stock.getUuid(), stock);
+
+			switch (op.getAction()) {
+				case "upsert":
+					stocks.put(stock.getUuid(), stock);
+					break;
+				case "remove":
+					stocks.remove(stock.getUuid());
+					break;
+			}
 		}
 	}
 }
